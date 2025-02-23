@@ -12,7 +12,7 @@ from tests.factories import AccountFactory
 from service.common import status  # HTTP Status Codes
 from service.models import db, Account, init_db
 from service.routes import app
-from unittest.mock import patch
+from unittest.mock import patch  # noqa: F401
 
 DATABASE_URI = os.getenv(
     "DATABASE_URI", "postgresql://postgres:postgres@localhost:5432/postgres"
@@ -129,9 +129,9 @@ class TestAccountService(TestCase):
         """It should Read a single Account"""
         account = self._create_accounts(1)[0]  # Create a sample account
         resp = self.client.get(f"{BASE_URL}/{account.id}", content_type="application/json")
-        
+
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
-        
+
         data = resp.get_json()
         self.assertEqual(data["name"], account.name)
 
